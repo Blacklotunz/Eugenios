@@ -5,11 +5,12 @@ public class FollowScript : MonoBehaviour {
     GameObject target;
     public float speed;
     GameObject[] landingPnts;
-    bool arrived;
+    bool arrived, catched;
 	
     // Use this for initialization
 	void Start () {
         arrived = false;
+        catched = false;
         landingPnts = GameObject.FindGameObjectsWithTag("Target");
         target = landingPnts[Random.Range(0, landingPnts.Length)];
 	}
@@ -37,16 +38,21 @@ public class FollowScript : MonoBehaviour {
         {
             arrived = true;
             target = landingPnts[Random.Range(0, landingPnts.Length)];
+            arrived = false;
         }
         if (collider.tag == "LandingPoint")
         {
+            arrived = true;
             this.transform.parent = collider.transform;
-            //Destroy(this.gameObject, 3.5f);
+           // Invoke("DestroyThis", 3.5f);
+            Destroy(this.gameObject, 3.5f);
         }
         if(collider.tag == "Player")
         {
             //Destroy(this.gameObject, 0f);
             Destroy(this.GetComponent<Collider2D>());
+            arrived = false;
+            this.catched = true;
 
             if (GameObject.Find("FinalPositionA").transform.childCount == 0)
             {
@@ -65,14 +71,24 @@ public class FollowScript : MonoBehaviour {
             }
             else
             {
+                Destroy(this.gameObject);
                 Debug.Log("END");
             }
         }
 
         if (collider.tag == "FinalPosition")
         {
-            //this.transform.parent = collider.transform;
+            this.transform.parent = collider.transform;
         }
 
+    }
+
+    private void DestroyThis()
+    {
+        Debug.Log("destroy");
+        if (!this.catched)
+        {
+            DestroyImmediate(this.gameObject);
+        }
     }
 }

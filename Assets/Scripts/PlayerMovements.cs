@@ -53,7 +53,7 @@ public class PlayerMovements : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider == planet.GetComponent<Collider2D>())
+        if(collider.name == "Planet")
             canJump = true;
     }
         
