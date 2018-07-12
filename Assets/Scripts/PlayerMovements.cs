@@ -24,7 +24,7 @@ public class PlayerMovements : MonoBehaviour {
         //////Horizontal movement////
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
-        rotationScript.speed = moveHorizontal == 0 ? 0 : rotationScript.speed + moveHorizontal * playerSpeed;
+        rotationScript.speed = moveHorizontal == 0 ? rotationScript.speed > 1 ? rotationScript.speed - playerSpeed * Time.deltaTime : rotationScript.speed + playerSpeed * Time.deltaTime : rotationScript.speed + moveHorizontal * playerSpeed * Time.deltaTime;
         //rotationScript.speed += moveHorizontal * playerSpeed;
 
         ////Vertical Movement////

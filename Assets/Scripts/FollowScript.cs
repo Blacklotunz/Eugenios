@@ -5,7 +5,7 @@ public class FollowScript : MonoBehaviour {
     GameObject target;
     public float speed;
     GameObject[] landingPnts;
-    bool arrived, catched;
+    public bool arrived, catched;
 	
     // Use this for initialization
 	void Start () {
@@ -37,15 +37,15 @@ public class FollowScript : MonoBehaviour {
         if (collider.tag == "Target")
         {
             arrived = true;
-            target = landingPnts[Random.Range(0, landingPnts.Length)];
-            arrived = false;
+            //target = landingPnts[Random.Range(0, landingPnts.Length)];
+            //arrived = false;
         }
-        if (collider.tag == "LandingPoint")
+        if (collider.tag == "LandingPoint" && !this.catched)
         {
             arrived = true;
             this.transform.parent = collider.transform;
            // Invoke("DestroyThis", 3.5f);
-            Destroy(this.gameObject, 3.5f);
+           // Destroy(this.gameObject, 3.5f);
         }
         if(collider.tag == "Player")
         {
@@ -85,7 +85,6 @@ public class FollowScript : MonoBehaviour {
 
     private void DestroyThis()
     {
-        Debug.Log("destroy");
         if (!this.catched)
         {
             DestroyImmediate(this.gameObject);
