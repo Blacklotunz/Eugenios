@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Background.cs" />
+    <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\CircleMovement.cs" />
     <Compile Include="Assets\Scripts\FollowScript.cs" />
     <Compile Include="Assets\Scripts\Gravity.cs" />

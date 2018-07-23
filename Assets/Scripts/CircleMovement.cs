@@ -8,7 +8,7 @@ public class CircleMovement : MonoBehaviour
     float angle;
     float speed; //2*PI in degress is 360, so you get 5 seconds to complete a circle
     float radius, t, originalRadius, maximum, minimum;
-    bool clockwise;
+    bool clockwise,collided;
     Collider2D collider;
     Vector3 scale;
 
@@ -18,6 +18,7 @@ public class CircleMovement : MonoBehaviour
         speed = (2 * Mathf.PI) / time;
         t = 0f;
         angle = 0;
+        collided = false;
     }
 
     void Update()
@@ -39,7 +40,7 @@ public class CircleMovement : MonoBehaviour
                 minimum = temp;
                 t = 0.0f;
             }
-
+            
             float xp2 = this.collider.transform.position.x;
             float yp2 = this.collider.transform.position.y;
             float xp1 = transform.position.x;
@@ -62,6 +63,7 @@ public class CircleMovement : MonoBehaviour
         
         if (collider.name == "Planet")
         {
+            this.collided = true;
             this.collider = collider;
             float xp2 = collider.transform.position.x;
             float yp2 = collider.transform.position.y;
@@ -75,7 +77,7 @@ public class CircleMovement : MonoBehaviour
 
 
             clockwise = (Random.value >= 0.5);
-            //Debug.Log(clockwise);
+
             originalRadius = radius;
             minimum = - 0.05f;
             maximum = 0.05f;

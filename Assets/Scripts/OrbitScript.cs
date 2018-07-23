@@ -15,7 +15,6 @@ public class OrbitScript : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (rb.velocity.magnitude > maxSpeed ) {
-            Debug.Log(rb.velocity.magnitude);
             rb.velocity.Set(0f,0f);
         }
     }
